@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title> Home Page</title>
+</head>
+    <body>
+        <h1> First Heading from {{content[1]}}</h1>
+        <p> Hello Paragraph from {{r}}!!!</p>
+        {% for x in content %}
+        <p> Hello {{x}}</p>
+        
+        {% if x == "Tim" %}
+            <p> {{x}}, you are Awesome </p>
+        {% else %}
+            <p> Thanks for joining {{x}} </p>
+        {% endif %}
+        
+        {% endfor %}
+</html>
