@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <title> Home Page</title>
+</head>
+	<style>
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			background-color: #f1f1c1;
+			text-align: left;
+			width:100%;>
+		}
+		th, td {
+			padding: 5px;
+			text-align: left; 
+			width:100%;			
+		}
+	</style>
+    <body>
+		<form action="/download" method="POST">
+			<table style="width:100%"> 
+				<caption>
+					<bold> Annotate Transcript Sentiments </bold>
+				</caption>
+				<tr> 
+					{% for column_name in content %}
+						<th> {{column_name}} </th>
+					{% endfor %}
+				</tr>
+				{% set i = namespace(value=1) %}
+				{% for row_id in file %}
+					<tr>
+						{% for column_name in content %}
+							{% if column_name == "Sentences" %}
+								<td> <p name="sent">{{row_id[0]}} </p></td>
+							{% else %}
+								{% if column_name == "EMOTIONAL ASPECTS" %}
+									<td> <input type="checkbox" style="visibility:hidden"> </td>
+								{% else %}
+									<td> <input type="checkbox" name="aspect" value="aspect_{{i.value}}_{{ loop.index }}"> </td>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					</tr>
+					{% set i.value = i.value + 1 %}
+				{% endfor %}
+				<caption>
+					<input type="submit" value="Annotate" name="submit" />
+				</caption>
+
+			</table>
+		</form>
+    </body>
+</html>
